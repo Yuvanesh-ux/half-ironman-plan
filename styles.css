@@ -161,6 +161,24 @@ main{max-width:var(--maxw);margin:0 auto;padding:0 clamp(16px,4vw,40px) 60px}
 .insight-text .lead{font-weight:500;color:#fff}
 .insight-text em{font-style:italic;color:var(--sun-2)}
 
+/* vacation notice */
+.vac-banner{
+  display:flex;gap:13px;align-items:flex-start;margin-top:20px;padding:14px 16px;
+  border-radius:var(--r);
+  background:linear-gradient(120deg,rgba(63,182,230,.10),rgba(77,157,255,.06));
+  border:1px solid rgba(63,182,230,.28);
+}
+.vac-banner.reentry{
+  background:linear-gradient(120deg,rgba(165,134,255,.10),rgba(63,182,230,.05));
+  border-color:rgba(165,134,255,.3);
+}
+.vac-ic{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:var(--swim);background:rgba(63,182,230,.14)}
+.vac-banner.reentry .vac-ic{color:var(--strength);background:rgba(165,134,255,.14)}
+.vac-ic svg{width:18px;height:18px}
+.vac-lab{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--swim);font-weight:600;margin-bottom:3px}
+.vac-banner.reentry .vac-lab{color:var(--strength)}
+.vac-txt{font-size:13.5px;line-height:1.5;color:var(--muted)}
+
 /* segments timeline */
 .segs{margin-top:26px;display:flex;flex-direction:column;gap:10px}
 .segs-lab{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}

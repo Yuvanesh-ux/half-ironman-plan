@@ -247,6 +247,7 @@
           <h2 class="focus-title">${d.title}<span class="effort-tag" style="background:${eff.bg};border:1px solid ${eff.bd};color:${eff.c}"><span class="effort-dot" style="background:${eff.c}"></span>${eff.label}</span></h2>
           <div class="chips">${chips}</div>
           <div class="metrics">${metrics}</div>
+          ${vacationBanner(d)}
           <div class="insight">
             <div class="insight-lab">◆ What today will feel like</div>
             <div class="insight-text">${ins.text}</div>
@@ -266,6 +267,24 @@
   }
 
   function mCell(val, lab) { return `<div class="metric"><span class="m-val">${val}</span><span class="m-lab">${lab}</span></div>`; }
+
+  // vacation-window notice, shown for days affected by the schedule adjustment
+  const PLANE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M21 15.5l-8.5-2.2V6.2a1.7 1.7 0 00-3.4 0v7.1L1 15.5v2l7.1-1.5v3.3l-2 1.3v1.4l3.7-1 3.7 1v-1.4l-2-1.3v-3.3L21 17.5z"/></svg>';
+  function vacationState(date) {
+    const v = META.vacation; if (!v) return null;
+    if (date >= v.window && date <= v.windowEnd) return "on";
+    if (date > v.windowEnd && date <= "2026-08-16") return "reentry";
+    return null;
+  }
+  function vacationBanner(d) {
+    const st = vacationState(d.date);
+    if (!st) return "";
+    const v = META.vacation;
+    if (st === "reentry") {
+      return `<div class="vac-banner reentry"><span class="vac-ic">${PLANE}</span><div><span class="vac-lab">Post-vacation re-entry</span><span class="vac-txt">${v.reentry}</span></div></div>`;
+    }
+    return `<div class="vac-banner"><span class="vac-ic">${PLANE}</span><div><span class="vac-lab">Vacation · run-only block (Jul 23 – Aug 8)</span><span class="vac-txt">${v.constraint} ${v.safety}</span></div></div>`;
+  }
   function distMain(s) { return s.split(";")[0].trim().split(" ")[0]; }
   function distUnit(s) {
     const first = s.split(";")[0].trim();
